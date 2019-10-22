@@ -5,7 +5,16 @@ import {
 
 const styles = StyleSheet.create({
   cardContainer: {},
-  cardFace: {},
+  cardFace: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
+    elevation: 10,
+  },
   icon: {
     position: 'absolute',
     top: 15,

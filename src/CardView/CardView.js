@@ -35,7 +35,7 @@ const defaultProps = {
   name: '',
   placeholder: {
     number: '•••• •••• •••• ••••',
-    name: 'NAME',
+    name: 'YOUR NAME',
     expiryTitle: 'MONTH/YEAR',
     expiry: '••/••',
     cvc: '•••',

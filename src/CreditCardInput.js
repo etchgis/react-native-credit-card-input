@@ -17,19 +17,17 @@ import { InjectedProps } from "./connectToState";
 
 const s = StyleSheet.create({
   container: {
-    alignItems: "center",
+
   },
   form: {
     marginHorizontal: 20,
     marginVertical: 20,
   },
   inputContainer: {
-    // marginLeft: 20,
-    // marginTop: 20,
     marginBottom: 20,
   },
   inputLabel: {
-    fontWeight: "bold",
+
   },
   input: {
     height: 40,
@@ -199,7 +197,7 @@ export default class CreditCardInput extends Component {
             keyboardType="numeric"
             containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]}
           />
-          <View style={{ display: "flex", flexDirection: "row" }}>
+          <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
             <CCInput
               {...this._inputProps("expiry")}
               keyboardType="numeric"

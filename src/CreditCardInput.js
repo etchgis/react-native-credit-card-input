@@ -20,7 +20,8 @@ const s = StyleSheet.create({
 
   },
   form: {
-    marginVertical: 20,
+    // marginVertical: 20,
+    marginTop: 20,
     paddingHorizontal: 20
   },
   inputContainer: {

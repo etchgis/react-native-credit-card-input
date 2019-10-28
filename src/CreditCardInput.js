@@ -17,12 +17,12 @@ import { InjectedProps } from "./connectToState";
 
 const s = StyleSheet.create({
   container: {
-
   },
   form: {
     // marginVertical: 20,
     marginTop: 20,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    height: 174
   },
   inputContainer: {
     marginBottom: 20,
@@ -40,7 +40,7 @@ const EXPIRY_INPUT_WIDTH = CVC_INPUT_WIDTH;
 const CARD_NUMBER_INPUT_WIDTH_OFFSET = 40;
 const CARD_NUMBER_INPUT_WIDTH = "100%";// Dimensions.get("window").width * 0.5;
 const NAME_INPUT_WIDTH = CARD_NUMBER_INPUT_WIDTH;
-const PREVIOUS_FIELD_OFFSET = 40;
+const PREVIOUS_FIELD_OFFSET = 100;
 const POSTAL_CODE_INPUT_WIDTH = 120;
 
 /* eslint react/prop-types: 0 */ // https://github.com/yannickcr/eslint-plugin-react/issues/106
@@ -78,6 +78,7 @@ export default class CreditCardInput extends Component {
       expiry: "EXPIRES IN",
       cvc: "CVC/CCV",
       postalCode: "POSTAL CODE",
+      nickname: "NICKNAME"
     },
     placeholders: {
       name: "Full name",
@@ -85,6 +86,7 @@ export default class CreditCardInput extends Component {
       expiry: "MM/YY",
       cvc: "CVC",
       postalCode: "34567",
+      nickname: "Nickname"
     },
     inputContainerStyle: {
       borderBottomWidth: 1,
@@ -109,12 +111,17 @@ export default class CreditCardInput extends Component {
     const scrollResponder = this.refs.Form.getScrollResponder();
     const nodeHandle = ReactNative.findNodeHandle(this.refs[field]);
 
-    NativeModules.UIManager.measureLayoutRelativeToParent(nodeHandle,
-      e => { throw e; },
-      x => {
-        scrollResponder.scrollTo({ x: Math.max(x - PREVIOUS_FIELD_OFFSET, 0), animated: true });
-        this.refs[field].focus();
+    this.refs[field].refs.input.measureLayout(
+      ReactNative.findNodeHandle(this.refs.Form), (x, y) => {
+        this.refs.Form.scrollTo({ x: 0, y: y - 64, animated: true });
       });
+
+    // NativeModules.UIManager.measureLayoutRelativeToParent(nodeHandle,
+    //   e => { throw e; },
+    //   y => {
+    //     scrollResponder.scrollTo({ y: Math.max(y - PREVIOUS_FIELD_OFFSET, 0), animated: true });
+    //     this.refs[field].focus();
+    //   });
   }
 
   _inputProps = field => {
@@ -162,6 +169,7 @@ export default class CreditCardInput extends Component {
       placeholderCardView,
       allowScroll,
       requiresName,
+      requiresNickname,
       requiresCVC,
       requiresPostalCode,
       cardScale,
@@ -190,7 +198,7 @@ export default class CreditCardInput extends Component {
           vertical
           keyboardShouldPersistTaps="always"
           scrollEnabled={allowScroll}
-          showsHorizontalScrollIndicator={false}
+          showsHorizontalScrollIndicator={true}
           style={s.form}
         >
           {requiresName && (
@@ -217,12 +225,12 @@ export default class CreditCardInput extends Component {
                 containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]}
               />
             )}
+
           </View>
-          {requiresPostalCode && (
+          {requiresNickname && (
             <CCInput
-              {...this._inputProps("postalCode")}
-              keyboardType="numeric"
-              containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]}
+              {...this._inputProps("nickname")}
+              containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH, paddingBottom: 100 }]}
             />
           )}
         </ScrollView>

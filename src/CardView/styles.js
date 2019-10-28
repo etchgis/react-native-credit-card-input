@@ -4,7 +4,9 @@ import {
 
 
 const styles = StyleSheet.create({
-  cardContainer: {},
+  cardContainer: {
+    alignSelf: "center"
+  },
   cardFace: {
     shadowColor: "#000",
     shadowOffset: {

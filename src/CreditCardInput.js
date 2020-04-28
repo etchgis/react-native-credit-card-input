@@ -113,7 +113,7 @@ export default class CreditCardInput extends Component {
 
     this.refs[field].refs.input.measureLayout(
       ReactNative.findNodeHandle(this.refs.Form), (x, y) => {
-        this.refs.Form.scrollTo({ x: 0, y: y - 64, animated: true });
+        this.refs.Form.scrollTo({ x: 0, y: y - 10, animated: true });
       });
 
     // NativeModules.UIManager.measureLayoutRelativeToParent(nodeHandle,
@@ -236,7 +236,7 @@ export default class CreditCardInput extends Component {
           {requiresNickname && (
             <CCInput
               {...this._inputProps("nickname")}
-              containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH, paddingBottom: 100 }]}
+              containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH, paddingBottom: 20 }]}
             />
           )}
         </ScrollView>
